@@ -3,6 +3,8 @@
   "version": "0.1.3",
   "license": "MIT",
   "exports": {
-    ".": "./src/mod.ts"
+    ".": "./src/mod.ts",
+    "./types": "./src/types.ts",
+    "./channel": "./src/channel.ts"
   }
 }
