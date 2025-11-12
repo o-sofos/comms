@@ -1,3 +1,23 @@
+// Reactivity Primitives
+export type StyleRule = {
+  prop: string;
+  value: Reactive<string | number>;
+  unit?: "px";
+};
+
+export type AttributeRule = {
+  name: string;
+  value: Reactive<string | number>;
+};
+
+export type Effect = () => void;
+export type Getter<T> = () => T;
+export type Reactive<T> = T | Getter<T>;
+
+export interface Signal<T> extends Getter<T> {
+  set(value: T): void;
+}
+
 export type FlickId = string;
 export const FLICK_ROOT_ID: FlickId = "__FLICK_ROOT__";
 
