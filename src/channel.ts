@@ -5,7 +5,7 @@ import { type FlickId, type WorkerToMainCommand } from "./types";
 let nextId = 0;
 export const createFlickId = (): FlickId => (nextId++).toString(36);
 
-// --- Command Queuing (The Batching Logic) ---
+// --- State and Command Queue ---
 let commandQueue: WorkerToMainCommand[] = [];
 let isBatchQueued = false;
 
@@ -19,7 +19,6 @@ function sendBatch() {
   isBatchQueued = false;
 }
 
-/** Adds a command to the queue and schedules a microtask to send the batch. */
 export function queueCommand(command: WorkerToMainCommand) {
   commandQueue.push(command);
   if (!isBatchQueued) {
@@ -34,7 +33,6 @@ export const workerEventListenerRegistry = new Map<
   Map<string, (payload: any) => void>
 >();
 
-/** Stores a user's event handler function. */
 export function registerWorkerListener(
   id: FlickId,
   event: string,
